@@ -1,0 +1,23 @@
+{
+    "name": "pac/cors-middleware",
+    "type": "library",
+    "description": "PAC CORS middleware",
+    "keywords": ["CORS", "PSR-7", "PSR-15"],
+    "license": "MIT",
+    "require": {
+        "http-interop/http-middleware": "dev-master",
+        "php": ">=7.1"
+    },
+    "require-dev": {
+        "codeception/codeception": "^2.2"
+    },
+    "autoload": {
+        "psr-4": {
+            "Pac\\CorsMiddleware\\": "src/",
+            "Test\\Unit\\": "tests/unit",
+            "Test\\Functional\\": "tests/functional",
+            "Test\\Acceptance\\": "tests/acceptance",
+            "Fixtures\\": "tests/_data/fixtures"
+        }
+    }
+}
