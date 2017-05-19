@@ -6,7 +6,7 @@
     "license": "MIT",
     "require": {
         "http-interop/http-middleware": "dev-master",
-        "neomerx/cors-psr7": "^1.0"
+        "neomerx/cors-psr7": "^1.0",
         "php": ">=7.1"
     },
     "require-dev": {
