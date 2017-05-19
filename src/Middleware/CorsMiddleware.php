@@ -48,9 +48,12 @@ class CorsMiddleware implements MiddlewareInterface
                 return new JsonResponse([], 403);
 
             case AnalysisResultInterface::TYPE_PRE_FLIGHT_REQUEST:
-                $corsHeaders = $cors->getResponseHeaders();
+                $response = new JsonResponse([]);
+                foreach ($cors->getResponseHeaders() as $header => $value) {
+                    $response = $response->withHeader($header, $value);
+                }
 
-                return new JsonResponse([], 200, $corsHeaders);
+                return $response;
 
             case AnalysisResultInterface::TYPE_REQUEST_OUT_OF_CORS_SCOPE:
                 return $delegate->process($request);

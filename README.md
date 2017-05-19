@@ -20,7 +20,6 @@ class AppKernel extends PacKernel
         ];
     }
 }
-
 ```
 
 In one of your `config.yml` files add
