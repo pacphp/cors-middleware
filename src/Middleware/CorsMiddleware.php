@@ -39,6 +39,48 @@ class CorsMiddleware implements MiddlewareInterface
     {
         $cors = $this->analyze($request);
 
+        if ($this->logger) {
+            switch ($cors->getRequestType()) {
+                case AnalysisResultInterface::TYPE_REQUEST_OUT_OF_CORS_SCOPE:
+                    $requestType = 'Out of CORS specification';
+
+                    break;
+                case AnalysisResultInterface::TYPE_PRE_FLIGHT_REQUEST:
+                    $requestType = 'Pre-flight';
+
+                    break;
+                case AnalysisResultInterface::TYPE_ACTUAL_REQUEST:
+                    $requestType = 'Actual request';
+
+                    break;
+                case AnalysisResultInterface::ERR_ORIGIN_NOT_ALLOWED:
+                    $requestType = 'origin is not allowed ';
+
+                    break;
+                case AnalysisResultInterface::ERR_METHOD_NOT_SUPPORTED:
+                    $requestType = 'method is not supported';
+
+                    break;
+                case AnalysisResultInterface::ERR_HEADERS_NOT_SUPPORTED:
+                    $requestType = 'headers are not supported';
+
+                    break;
+                case AnalysisResultInterface::ERR_NO_HOST_HEADER:
+                    $requestType = 'No Host header in request';
+
+                    break;
+                default:
+                    $requestType = 'Unknown';
+
+                    break;
+            }
+
+            $this->logger->info("CORS Info");
+            $this->logger->info("=========");
+            $this->logger->info("Request Type: $requestType");
+            $this->logger->info("=========");
+        }
+
         switch ($cors->getRequestType()) {
             case AnalysisResultInterface::ERR_NO_HOST_HEADER:
             case AnalysisResultInterface::ERR_ORIGIN_NOT_ALLOWED:

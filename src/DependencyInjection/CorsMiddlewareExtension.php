@@ -17,7 +17,7 @@ class CorsMiddlewareExtension implements ExtensionInterface
         $config = call_user_func_array('array_merge', $configs);
 
         $definition = (new Definition(CorsMiddleware::class))
-            ->setArguments([$config, new Reference('logger', ContainerInterface::NULL_ON_INVALID_REFERENCE)])
+            ->setArguments([$config, new Reference('logger', ContainerInterface::EXCEPTION_ON_INVALID_REFERENCE)])
         ;
         $container->setDefinition('cors_middleware', $definition);
     }
