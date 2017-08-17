@@ -8,6 +8,7 @@ use Interop\Http\ServerMiddleware\MiddlewareInterface;
 use Neomerx\Cors\Analyzer;
 use Neomerx\Cors\Contracts\AnalysisResultInterface;
 use Neomerx\Cors\Contracts\AnalysisStrategyInterface;
+use Neomerx\Cors\Contracts\Constants\CorsRequestHeaders;
 use Neomerx\Cors\Strategies\Settings;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
@@ -74,10 +75,16 @@ class CorsMiddleware implements MiddlewareInterface
 
                     break;
             }
-
+            $corsHeader = 'None';
+            if ($request->hasHeader(CorsRequestHeaders::ORIGIN) === true) {
+                $corsHeader = implode(' - ', $request->getHeader(CorsRequestHeaders::ORIGIN));
+            }
+            $uri = (string) $request->getUri();
             $this->logger->info("CORS Info");
             $this->logger->info("=========");
-            $this->logger->info("Request Type: $requestType");
+            $this->logger->info("CORS Request Headers: $corsHeader");
+            $this->logger->info("CORS Request Type: $requestType");
+            $this->logger->info("Request Uri: $uri)");
             $this->logger->info("=========");
         }
 
