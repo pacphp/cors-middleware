@@ -5,7 +5,8 @@
     "keywords": ["CORS", "PSR-7", "PSR-15"],
     "license": "MIT",
     "require": {
-        "http-interop/http-middleware": "^0.5.0",
+        "http-interop/http-server-handler": "^1.0",
+        "http-interop/http-server-middleware": "^1.0",
         "neomerx/cors-psr7": "^1.0",
         "php": ">=7.1"
     },
